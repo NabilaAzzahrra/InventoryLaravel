@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('id_item');
             $table->string('status');
             $table->string('availability');
-            $table->string('qr');
             $table->timestamps();
         });
     }

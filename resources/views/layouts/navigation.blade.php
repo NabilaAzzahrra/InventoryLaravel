@@ -76,7 +76,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('scan')">
+                    <x-nav-link :href="route('scan.index')" :active="request()->routeIs('scan')">
                         {{ __('Scan') }}
                     </x-nav-link>
                 </div>

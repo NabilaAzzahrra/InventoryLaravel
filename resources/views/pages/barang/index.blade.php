@@ -8,6 +8,8 @@
         <div class="px-2 max-w-7sm gap-8 justify-center mx-auto sm:px-6 lg:px-8 md:flex lg:flex">
 
             <div class="bg-white my-2 overflow-hidden shadow-lg w-full rounded-lg lg:rounded-lg md:rounded-lg">
+
+                <canvas id="canvas"></canvas>
                 <div class="p-4 text-gray-900 w-full">
                     <div class="bg-slate-100 shadow-2xl border-slate-900 border-xl p-4 rounded-lg ">
                         <div class="flex justify-between">
@@ -43,6 +45,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
                 <div class="fixed inset-0 bg-black opacity-50"></div>
@@ -83,11 +86,24 @@
 
         </div>
     </div>
-
-
+    <script src="{{ asset('assets/js/dom-to-image.min.js') }}"></script>
+    <script src="{{ asset('assets/js/qr-scanner.min.js') }}"></script>
+    <script src="{{ asset('assets/js/qrcode.js') }}"></script>
+    <script>
+        let code;
+        const showQRCode = () => {
+            const canvas = document.getElementById('canvas');
+            QRCode.toCanvas('heuheuheu', {
+                errorCorrectionLevel: 'H'
+            }, function(err, canvas) {
+                if (err) throw err;
+                code = canvas;
+            })
+        }
+        console.log(code);
+    </script>
     <script>
         $(document).ready(function() {
-            console.log('RUN!');
             $('#detail-datatable').DataTable({
                 ajax: {
                     url: 'api/inventory_item_detail',
@@ -140,8 +156,17 @@
                 }, {
                     data: 'id_item',
                     render: (data, type, row) => {
+                        const canvas = document.createElement('canvas');
+                        QRCode.toCanvas(canvas, data, {
+                            errorCorrectionLevel: 'H'
+                        }, function(error) {
+                            if (error) console.error(error);
+                        });
+
                         return `
-                            <div class="text-red-500">${data}</div>
+                            <div>
+                                <img src="${canvas.toDataURL()}">
+                            </div>
                         `;
                     }
                 }, {

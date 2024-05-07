@@ -7,6 +7,7 @@ use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuangController;
+use App\Http\Controllers\ScanScontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +41,7 @@ Route::resource('merk', MerkController::class)->middleware(['auth']);
 Route::resource('kategori', KategoriController::class)->middleware(['auth']);
 Route::resource('divisi', DivisiController::class)->middleware(['auth']);
 Route::resource('barang', BarangController::class)->middleware(['auth']);
+
+Route::get('/scan', [ScanScontroller::class, 'index'])->name('scan.index')->middleware(['auth']);
 
 require __DIR__.'/auth.php';

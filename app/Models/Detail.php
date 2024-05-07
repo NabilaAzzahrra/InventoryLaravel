@@ -12,8 +12,7 @@ class Detail extends Model
         'code',
         'id_item',
         'status',
-        'availability',
-        'qr',
+        'availability'
     ];
 
     protected $table = 'inventory_item_detail';
