@@ -14,7 +14,7 @@
                             <div class="p-2">
                                 <h2>DATA BARANG</h2>
                             </div>
-                            <a href="{{route('barang.create')}}">
+                            <a href="{{ route('barang.create') }}">
                                 <div class="bg-sky-400 py-2 px-4 rounded-lg text-white hover:bg-sky-500">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
@@ -138,9 +138,11 @@
                         return data.cost_of_depreciation;
                     }
                 }, {
-                    data: 'qr',
+                    data: 'id_item',
                     render: (data, type, row) => {
-                        return data;
+                        return `
+                            <div class="text-red-500">${data}</div>
+                        `;
                     }
                 }, {
                     data: {
