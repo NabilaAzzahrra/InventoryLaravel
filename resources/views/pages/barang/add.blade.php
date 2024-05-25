@@ -14,7 +14,7 @@
                     </div>
                     <div class="flex justify-center">
                         <div class="p-12" style="width:100%">
-                            <form method="POST" action="{{ route('barang.store') }}">
+                            <form method="POST" action="{{ route('barang.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="grid grid-cols-4 gap-5">
                                     <div class="mb-5 w-full"hidden>
@@ -131,14 +131,22 @@
                                         <span class="text-sm m-l text-red-500">{{ $errors->first('informasi') }}</span>
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-4 gap-5">
+                                <div class="grid grid-cols-5 gap-5">
                                     <div class="mb-5 w-full">
-                                        <label for="kode"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Faktur
-                                            <span class="text-red-500">*</span></label>
+                                        <label for="faktur" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Faktur <span class="text-red-500">*</span>
+                                        </label>
                                         <input
                                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                             aria-describedby="user_avatar_help" id="faktur" name="faktur" type="file">
+                                    </div>
+                                    <div class="mb-5 w-full">
+                                        <label for="picture" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Foto <span class="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                            aria-describedby="user_avatar_help" id="picture" name="picture" type="file">
                                     </div>
                                     <div class="mb-5 w-full">
                                         <label for="harga"

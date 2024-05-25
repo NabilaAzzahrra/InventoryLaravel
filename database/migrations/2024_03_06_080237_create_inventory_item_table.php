@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('id_division');
             $table->string('information');
             $table->string('invoice');
+            $table->string('picture');
             $table->float('price');
             $table->float('cost_of_depreciation');
             $table->integer('id_user');

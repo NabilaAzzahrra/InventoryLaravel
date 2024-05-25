@@ -157,10 +157,11 @@
                     }
                 }, {
                     data: {
-                        no: 'no',
-                        name: 'name'
+                        id: 'id',
+                        id_floor: 'id_floor',
+                        room: 'room'
                     },
-                    render: (data) => {
+                    render: (data, type, row) => {
                         let editUrl =
                             `<button type="button" data-id="${data.id}"
                                                         data-modal-target="sourceModal" data-id_floor="${data.id_floor}" data-room="${data.room}"
@@ -182,9 +183,8 @@
             const id = button.dataset.id;
             const room = button.dataset.room;
             const id_floor = button.dataset.id_floor;
-
+            console.log(button.dataset);
             let url = "{{ route('ruang.update', ':id') }}".replace(':id', id);
-            console.log(url);
             let status = document.getElementById(modalTarget);
             document.getElementById('title_source').innerText = `Update Ruang ${room}`;
             document.getElementById('room').value = room;

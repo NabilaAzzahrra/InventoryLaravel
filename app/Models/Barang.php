@@ -18,6 +18,7 @@ class Barang extends Model
         'id_division',
         'information',
         'invoice',
+        'picture',
         'price',
         'cost_of_depreciation',
         'id_user',

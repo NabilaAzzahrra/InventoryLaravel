@@ -17,6 +17,8 @@ class Detail extends Model
 
     protected $table = 'inventory_item_detail';
 
+    public $timestamps = true;
+
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'code', 'code');
@@ -35,5 +37,10 @@ class Detail extends Model
     public function room()
     {
         return $this->belongsTo(Ruang::class, 'id_room', 'id');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id_item', 'id');
     }
 }
