@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BkeluarController;
 use App\Http\Controllers\BmasukController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LantaiController;
@@ -32,9 +33,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -52,6 +53,7 @@ Route::resource('bmasuk', BmasukController::class)->middleware(['auth']);
 Route::resource('bkeluar', BkeluarController::class)->middleware(['auth']);
 Route::resource('print', PrintController::class)->middleware(['auth']);
 Route::resource('peminjaman', PeminjamanController::class)->middleware(['auth']);
+Route::resource('dashboard', dashboardController::class)->middleware(['auth']);
 
 Route::get('/scan', [ScanScontroller::class, 'index'])->name('scan.index')->middleware(['auth']);
 Route::get('/scanQr/{id}/show', [ScanqrController::class, 'show'])->name('scanqr.edit');
