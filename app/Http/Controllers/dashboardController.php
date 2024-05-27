@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detail;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class dashboardController extends Controller
@@ -13,7 +15,19 @@ class dashboardController extends Controller
      */
     public function index()
     {
+        $detail = Detail::count();
+        $category = Kategori::count();
+        $detail_pinjam = Detail::where('status', 'PINJAM')->count();
+        $detail_baik = Detail::where('status', 'BAIK')->count();
+        $detail_maintenance = Detail::where('status', 'MAINTENANCE')->count();
+        $detail_rusak = Detail::where('status', 'RUSAK')->count();
         return view('dashboard')->with([
+            'inventory_item_detail' => $detail,
+            'detail_pinjam' => $detail_pinjam,
+            'detail_baik' => $detail_baik,
+            'detail_maintenance' => $detail_maintenance,
+            'detail_rusak' => $detail_rusak,
+            'category' => $category,
         ]);
     }
 
