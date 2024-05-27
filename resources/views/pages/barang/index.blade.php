@@ -73,6 +73,7 @@
                                         <option value="">Pilih...</option>
                                         <option value="BAIK">BAIK</option>
                                         <option value="RUSAK">RUSAK</option>
+                                        <option value="MAINTENANCE">MAINTENANCE</option>
                                         <option value="PINJAM">PINJAM</option>
                                     </select>
                                 </div>
@@ -163,6 +164,7 @@
                         let warnaHijau = `bg-green-400`;
                         let warnaMerah = `bg-red-500`;
                         let warnaKuning = `bg-amber-400`;
+                        let warnaBiru = `bg-sky-400`;
                         let badge;
 
                         if (data == 'BAIK') {
@@ -171,6 +173,9 @@
                         } else if (data == 'RUSAK') {
                             badge =
                                 `<small class='${warnaMerah} py-1 px-4 rounded-xl text-white'>${data}</small>`;
+                        } else if (data == 'MAINTENANCE') {
+                            badge =
+                                `<small class='${warnaBiru} py-1 px-4 rounded-xl text-white'>${data}</small>`;
                         } else {
                             badge =
                                 `<small class='${warnaKuning} py-1 px-4 rounded-xl'>${data}</small>`;
