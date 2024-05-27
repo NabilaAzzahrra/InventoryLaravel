@@ -5,9 +5,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard.index') }}">
+                    {{-- <a href="{{ route('dashboard.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                    </a> --}}
+                    <img src="{{ url('images/logolp.png') }}" alt="" srcset="" class="w-[120px] h-auto">
                 </div>
 
                 <!-- Navigation Links -->
@@ -36,23 +37,23 @@
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                 aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{route('lantai.index')}}"
+                                    <a href="{{ route('lantai.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lantai</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('ruang.index')}}"
+                                    <a href="{{ route('ruang.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ruang</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('merk.index')}}"
+                                    <a href="{{ route('merk.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merk</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('kategori.index')}}"
+                                    <a href="{{ route('kategori.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kategori</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('divisi.index')}}"
+                                    <a href="{{ route('divisi.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Divisi</a>
                                 </li>
                             </ul>
@@ -86,12 +87,14 @@
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                 aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{route('bmasuk.index')}}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang Masuk</a>
+                                    <a href="{{ route('bmasuk.index') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
+                                        Masuk</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('bkeluar.index')}}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang Keluar</a>
+                                    <a href="{{ route('bkeluar.index') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
+                                        Keluar</a>
                                 </li>
                             </ul>
                         </div>
@@ -125,22 +128,25 @@
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                            <div class="pl-4">
+                                <dotlottie-player src="{{ url('json/profile.json') }}" background="transparent"
+                                    speed="1" style="width: 30px; height: 30px;" loop autoplay></dotlottie-player>
                             </div>
+                            {{-- <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div> --}}
                         </button>
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        {{-- <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link> --}}
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -206,6 +212,7 @@
         </div>
     </div>
 </nav>
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <script>
     const dropdownDigital = () => {
         let content = document.getElementById('digitalNavbar');

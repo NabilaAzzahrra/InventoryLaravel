@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">
-                <div class="p-6 text-gray-900 grid grid-cols-3 gap-4">
+                <div class="p-6 text-gray-900 grid md:grid-cols-3 gap-4 grid-cols-1">
 
                     <div class="bg-white px-8 py-4 w-full rounded-3xl shadow-xl">
                         <div class="flex items-center justify-between">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="my-5">
-                                <a href="#"
+                                <a href="{{ route('barang.index') }}"
                                     class="text-sm p-2 bg-amber-400 hover:bg-amber-500 hover:text-white rounded-xl font-bold px-8">Selengkapnya</a>
                             </div>
                             <div class="relative flex items-end -mb-4 -mr-8">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="my-5">
-                                <a href="#"
+                                <a href="{{ route('barang.index') }}"
                                     class="text-sm p-2 bg-amber-400 hover:bg-amber-500 hover:text-white rounded-xl font-bold px-8">Selengkapnya</a>
                             </div>
                             <div class="relative flex items-end -mb-4 -mr-8">
@@ -126,7 +126,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="my-5">
-                                <a href="#"
+                                <a href="{{ route('barang.index') }}"
                                     class="text-sm p-2 bg-amber-400 hover:bg-amber-500 hover:text-white rounded-xl font-bold px-8">Selengkapnya</a>
                             </div>
                             <div class="relative flex items-end -mb-4 -mr-8">
@@ -159,7 +159,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="my-5">
-                                <a href="#"
+                                <a href="{{ route('barang.index') }}"
                                     class="text-sm p-2 bg-amber-400 hover:bg-amber-500 hover:text-white rounded-xl font-bold px-8">Selengkapnya</a>
                             </div>
                             <div class="relative flex items-end -mb-4 -mr-8">
@@ -192,7 +192,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="my-5">
-                                <a href="#"
+                                <a href="{{ route('kategori.index') }}"
                                     class="text-sm p-2 bg-amber-400 hover:bg-amber-500 hover:text-white rounded-xl font-bold px-8">Selengkapnya</a>
                             </div>
                             <div class="relative flex items-end -mb-4 -mr-8">
