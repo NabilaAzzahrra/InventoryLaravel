@@ -23,6 +23,7 @@
                                         <th>No HP</th>
                                         <th>Kode Barang</th>
                                         <th>Keperluan</th>
+                                        <th>Status</th>
                                         <th>Tanggal Pinjam</th>
                                         <th>Action</th>
                                     </tr>
@@ -117,12 +118,21 @@
                         return data;
                     }
                 }, {
+                    data: 'item_status',
+                    render: (data, type, row) => {
+                        if (data === 'RETURNED') {
+                            return `<small class="bg-sky-400 p-1 rounded-xl font-bold">${data}</small>`;
+                        } else {
+                            return `<small class="bg-amber-400 p-1 rounded-xl font-bold">${data}</small>`;
+                        }
+                    }
+                }, {
                     data: 'created_at',
                     render: (data, type, row) => {
                         const date = new Date(data);
                         const day = ('0' + date.getDate()).slice(-2);
                         const month = ('0' + (date.getMonth() + 1)).slice(-
-                        2);
+                            2);
                         const year = date.getFullYear();
                         const hours = ('0' + date.getHours()).slice(-2);
                         const minutes = ('0' + date.getMinutes()).slice(-2);
