@@ -58,5 +58,7 @@ Route::get('/scanQr/{id}/show', [ScanqrController::class, 'show'])->name('scanqr
 Route::post('/scanQr', [ScanqrController::class, 'store'])->name('scanqr.store');
 Route::get('/scanQr', [ScanqrController::class, 'index'])->name('scanqr.index');
 Route::get('/scanQr', [ScanqrController::class, 'update'])->name('scanqr.update');
+Route::post('/scanQr/{id}', [ScanqrController::class, 'update'])->name('scanqr.update');
+
 
 require __DIR__.'/auth.php';

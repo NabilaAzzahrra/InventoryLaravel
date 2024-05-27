@@ -16,6 +16,7 @@ class Peminjaman extends Model
         'no_hp',
         'needs',
         'inventory_loan_letter',
+        'item_status',
     ];
 
     protected $table = 'inventory_lending';

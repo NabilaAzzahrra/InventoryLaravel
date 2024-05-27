@@ -88,9 +88,7 @@ class ScanqrController extends Controller
         $detailPinjam = Detail::findOrFail($id);
         $detailPinjam->update($data);
 
-        return redirect()
-            ->route('scanqr.index')
-            ->with('message', 'Data Peminjaman Sudah ditambahkan');
+        return back()->with('message_delete', 'Data Lantai Sudah dihapus');
     }
 
     /**
@@ -109,8 +107,12 @@ class ScanqrController extends Controller
             ->where('inventory_item_detail.id', $id)
             ->select('inventory_item_detail.*', 'inventory_item.*', 'inventory_item_detail.id as id_inventory_item', 'floor.*', 'room.*', 'category.*', 'division.*')
             ->first();
+        $inventory_landing = Peminjaman::where('inventory_lending.id_item', $id)
+            ->where('item_status', 'BORROWED')
+            ->first();
         return view('pages/scan/detail_scan')->with([
             'inventory_item_detail' => $detail,
+            'inventory_landing' => $inventory_landing,
         ]);
     }
 
@@ -134,37 +136,30 @@ class ScanqrController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'ruang' => 'required',
-                'id_floor' => 'required',
-            ],
-            [
-                'ruang.required' => 'Lantai tidak boleh kosong',
-                'id_floor.required' => 'Lantai tidak boleh kosong',
-            ],
-        );
+        $status = $request->input('ItemStatus');
 
         $data = [
-            'id_floor' => $request->input('id_floor'),
-            'room' => $request->input('ruang'),
+            'status' => "BAIK",
+            'availability' => "AVAILABLE",
         ];
 
-        $room = Detail::findOrFail($id);
+        $datas = [
+            'item_status' => "RETURNED",
+        ];
 
-        if ($room) {
-            $room->update($data);
-            return redirect()
-                ->route('ruang.index')
-                ->with('message', 'Data Ruang Sudah diupdate');
-        } else {
-            return redirect()
-                ->route('ruang.index')
-                ->with('error', 'Data Ruang tidak ditemukan');
-        }
+        $detail = Detail::findOrFail($id);
+
+        $pinjam = Peminjaman::where('id_item', $id)
+            ->where('item_status', $status)
+            ->firstOrFail();
+
+        $detail->update($data);
+        $pinjam->update($datas);
+
+        return back()->with('message_delete', 'Data Lantai Sudah dihapus');
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
