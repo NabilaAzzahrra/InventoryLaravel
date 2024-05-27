@@ -424,6 +424,11 @@
                     '<div class="bg-slate-400 w-56 text-center p-1 rounded-xl mt-5">Barang Tidak Tersedia</div>';
                 loanContainer.style.pointerEvents = 'none';
                 loanContainer.removeAttribute('onclick');
+            } else if (status === 'MAINTENANCE') {
+                loanContainer.innerHTML =
+                    '<div class="bg-slate-400 w-56 text-center p-1 rounded-xl mt-5">Barang Tidak Tersedia</div>';
+                loanContainer.style.pointerEvents = 'none';
+                loanContainer.removeAttribute('onclick');
             } else if (availability === 'NOT AVAILABLE') {
                 loanContainer.innerHTML =
                     '<div class="bg-gray-400 w-56 text-center p-1 rounded-xl mt-5">Barang Tidak Tersedia</div>';
