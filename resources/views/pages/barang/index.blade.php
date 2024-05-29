@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('LANTAI') }}
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('BARANG') }}
         </h2>
     </x-slot>
     <div class="py-2">
@@ -188,7 +188,7 @@
                     render: (data, type, row) => {
                         return data;
                     }
-                }, 
+                },
                 // {
                 //     data: 'id_item',
                 //     render: (data, type, row) => {
@@ -205,7 +205,7 @@
                 //             </div>
                 //         `;
                 //     }
-                // }, 
+                // },
                 {
                     data: {
                         no: 'no',
@@ -231,7 +231,7 @@
                             `<button onclick="return barangDelete('${data.id}','${data.barang.name}')" class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white"><i class="fas fa-trash"></i></button>`;
                         return `
                         <div class='flex gap-2'>
-                            <div style="text-align:center">${deleteUrl}</div> 
+                            <div style="text-align:center">${deleteUrl}</div>
                             <div style="text-align:center">${statusUrl}</div>
                             <div style="text-align:center">${moreUrl}</div>
                         </div>`;

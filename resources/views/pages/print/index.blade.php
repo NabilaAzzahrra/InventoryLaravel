@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('LANTAI') }}
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('PRINT NOMOR') }}
         </h2>
     </x-slot>
     <div class="py-2">
@@ -164,27 +164,31 @@
                             return data.cost_of_depreciation;
                         }
                     }, {
-                        data: 'status',
-                        render: (data, type, row) => {
-                            let warnaHijau = `bg-green-400`;
-                            let warnaMerah = `bg-red-500`;
-                            let warnaKuning = `bg-amber-400`;
-                            let badge;
+                    data: 'status',
+                    render: (data, type, row) => {
+                        let warnaHijau = `bg-green-400`;
+                        let warnaMerah = `bg-red-500`;
+                        let warnaKuning = `bg-amber-400`;
+                        let warnaBiru = `bg-sky-400`;
+                        let badge;
 
-                            if (data == 'BAIK') {
-                                badge =
-                                    `<small class='${warnaHijau} py-1 px-4 rounded-xl'>${data}</small>`;
-                            } else if (data == 'RUSAK') {
-                                badge =
-                                    `<small class='${warnaMerah} py-1 px-4 rounded-xl text-white'>${data}</small>`;
-                            } else {
-                                badge =
-                                    `<small class='${warnaKuning} py-1 px-4 rounded-xl'>${data}</small>`;
-                            }
-
-                            return badge;
+                        if (data == 'BAIK') {
+                            badge =
+                                `<small class='${warnaHijau} py-1 px-4 rounded-xl'>${data}</small>`;
+                        } else if (data == 'RUSAK') {
+                            badge =
+                                `<small class='${warnaMerah} py-1 px-4 rounded-xl text-white'>${data}</small>`;
+                        } else if (data == 'MAINTENANCE') {
+                            badge =
+                                `<small class='${warnaBiru} py-1 px-4 rounded-xl text-white'>${data}</small>`;
+                        } else {
+                            badge =
+                                `<small class='${warnaKuning} py-1 px-4 rounded-xl'>${data}</small>`;
                         }
-                    }, {
+
+                        return badge;
+                    }
+                }, {
                         data: 'availability',
                         render: (data, type, row) => {
                             return data;

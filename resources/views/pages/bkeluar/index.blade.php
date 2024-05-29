@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('BARANG KELUAR') }}
         </h2>
     </x-slot>
 
@@ -294,9 +294,9 @@
                     let studentBucket = [];
                     const date = new Date(data.barang.created_at);
                     const day = date.getDate().toString().padStart(2,
-                    '0'); 
+                    '0');
                     const month = (date.getMonth() + 1).toString().padStart(2,
-                    '0'); 
+                    '0');
                     const year = date.getFullYear();
                     const formattedDate = `${day}/${month}/${year}`;
                     studentBucket.push(

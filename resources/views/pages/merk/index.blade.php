@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('LANTAI') }}
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('MERK') }}
         </h2>
     </x-slot>
     <div class="py-2">
