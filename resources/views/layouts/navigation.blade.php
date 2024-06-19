@@ -11,114 +11,220 @@
                     <img src="{{ url('images/logolp.png') }}" alt="" srcset="" class="w-[120px] h-auto">
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                @can('role-A')
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <li class="relative list-none">
-                        <button onclick="dropdownDigital()" id="dropdownNavbarLink"
-                            data-dropdown-toggle="dropdownNavbar"
-                            class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <li class="relative list-none">
+                            <button onclick="dropdownDigital()" id="dropdownNavbarLink"
+                                data-dropdown-toggle="dropdownNavbar"
+                                class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
                         flex mt-6 items-center justify-between w-full text-sm py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Master
-                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="digitalNavbar"
-                            class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                                aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="{{ route('lantai.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lantai</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('ruang.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ruang</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('merk.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merk</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('kategori.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kategori</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('divisi.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Divisi</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </div>
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="digitalNavbar"
+                                class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                    aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <a href="{{ route('lantai.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lantai</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('ruang.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ruang</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('merk.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merk</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('kategori.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kategori</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('divisi.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Divisi</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('barang.index')" :active="request()->routeIs('barang')">
-                        {{ __('Barang') }}
-                    </x-nav-link>
-                </div>
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('barang.index')" :active="request()->routeIs('barang')">
+                            {{ __('Barang') }}
+                        </x-nav-link>
+                    </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <li class="relative list-none">
-                        <button onclick="dropdownDigitall()" id="dropdownNavbarLink"
-                            data-dropdown-toggle="dropdownNavbar"
-                            class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <li class="relative list-none">
+                            <button onclick="dropdownDigitall()" id="dropdownNavbarLink"
+                                data-dropdown-toggle="dropdownNavbar"
+                                class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
                         flex mt-6 items-center justify-between w-full text-sm py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Transaksi
-                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="digitalNavbarr"
-                            class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                                aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="{{ route('bmasuk.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
-                                        Masuk</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('bkeluar.index') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
-                                        Keluar</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </div>
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="digitalNavbarr"
+                                class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                    aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <a href="{{ route('bmasuk.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
+                                            Masuk</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('bkeluar.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Barang
+                                            Keluar</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
 
-                <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- Navigation Links -->
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('scan.index')" :active="request()->routeIs('scan')">
                         {{ __('Scan') }}
                     </x-nav-link>
                 </div> --}}
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('print.index')" :active="request()->routeIs('print')">
-                        {{ __('Print Nomor') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('print.index')" :active="request()->routeIs('print')">
+                            {{ __('Print Nomor') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman')">
-                        {{ __('Peminjaman Barang') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman')">
+                            {{ __('Peminjaman Barang') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+
+                @can('role-P')
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <li class="relative list-none">
+                            <button onclick="dropdownDigital()" id="dropdownNavbarLink"
+                                data-dropdown-toggle="dropdownNavbar"
+                                class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
+                        flex mt-6 items-center justify-between w-full text-sm py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Master
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="digitalNavbar"
+                                class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                    aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <a href="{{ route('jenis.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Jenis Koleksi</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('sumber.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sumber Koleksi</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('jurusan.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Jurusan Koleksi</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
+
+                     <!-- Navigation Links -->
+                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('koleksi.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Koleksi') }}
+                        </x-nav-link>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Input Koleksi Keluar') }}
+                        </x-nav-link>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <li class="relative list-none">
+                            <button onclick="dropdownDigitall()" id="dropdownNavbarLink"
+                                data-dropdown-toggle="dropdownNavbar"
+                                class="{{ request()->routeIs(['major', 'recruitment']) ? 'text-gray-900' : 'text-gray-500' }}
+                        flex mt-6 items-center justify-between w-full text-sm py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Transaksi
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="digitalNavbarr"
+                                class="absolute z-10 top-[60px] hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                    aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <a href="{{ route('lantai.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Koleksi Keluar</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('ruang.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Koleksi Masuk</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Input Koleksi KKN Kelompok') }}
+                        </x-nav-link>
+                    </div>
+
+                     <!-- Navigation Links -->
+                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('QR-Code') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+
             </div>
 
             <!-- Settings Dropdown -->

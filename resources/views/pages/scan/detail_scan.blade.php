@@ -188,7 +188,7 @@
                     action="{{ route('scanqr.update', ['id' => '__ID__']) }}">
                     @csrf
                     <div id="pengembalianForm" class="hidden">
-                        <input type="text" name="idItemKembali" 
+                        <input type="text" name="idItemKembali"
                             id="idItemKembali">
                         <input type="hidden" name="judulKembali" id="judulKembali" value="PENGEMBALIAN">
                         <input type="hidden" name="ItemStatus" id="ItemStatus" value="BORROWED">
