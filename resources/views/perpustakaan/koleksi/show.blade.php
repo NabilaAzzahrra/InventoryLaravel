@@ -48,11 +48,31 @@
                                         <span class="font-bold">Tahun Terbit</span>
                                     </div>
                                     <p class="my-2">{{ $koleksi->tahun_terbit }}</p>
-                                    <div class="flex items-center gap-3">
+
+                                    @php
+                                        if ($koleksi->ketersediaan == 'AVAILABLE') {
+                                            $keluar = 'hidden';
+                                            $masuk = '';
+                                        } else {
+                                            $keluar = '';
+                                            $masuk = 'hidden';
+                                        }
+
+                                    @endphp
+                                    {{-- TANGGAL --}}
+                                    <div class="flex items-center gap-3 {{$masuk}}">
                                         <i class="fa-solid fa-calendar-days"></i>
                                         <span class="font-bold">Tanggal Masuk</span>
                                     </div>
-                                    <p class="my-2">{{ $koleksi->tgl_masuk }}</p>
+                                    <p class="my-2 {{$masuk}}">{{ $koleksi->tgl_masuk }}</p>
+
+                                    <div class="flex items-center gap-3 {{$keluar}}">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <span class="font-bold">Tanggal Keluar</span>
+                                    </div>
+                                    <p class="my-2 {{$keluar}}">{{ $koleksi->tgl_keluar }}</p>
+                                    {{-- ==== --}}
+
                                     <div class="flex items-center gap-3">
                                         <i class="fa-solid fa-file"></i>
                                         <span class="font-bold">Sumber</span>
@@ -63,21 +83,21 @@
                                         <span class="font-bold">Ketersediaan</span>
                                     </div>
                                     <p class="my-2">{{ $koleksi->ketersediaan }}</p>
-                                    <div class="flex items-center gap-3">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span class="font-bold">Tanggal Keluar</span>
-                                    </div>
-                                    <p class="my-2">{{ $koleksi->tgl_keluar }}</p>
-                                    <button type="button" onclick="window.location.href='{{ route('koleksi.edit', $koleksi->id) }}'" class="mt-4 bg-white border border-2 border-black hover:bg-black hover:text-white px-3 py-1 rounded-full shadow-md text-md text-black">
+
+                                    <button type="button"
+                                        onclick="window.location.href='{{ route('koleksi.edit', $koleksi->id_koleksi) }}'"
+                                        class="mt-4 bg-white border border-2 border-black hover:bg-black hover:text-white px-3 py-1 rounded-full shadow-md text-md text-black">
                                         <i class="fa-solid fa-pen-to-square"></i> Edit
                                     </button>
-                                    <button type="button" onclick="window.location.href='{{ route('koleksi.index') }}'" class="mt-4 bg-amber-300 hover:bg-black px-3 py-1 rounded-full shadow-md text-md text-black border border-2 border-black border-black hover:bg-black hover:text-white">
+                                    <button type="button"
+                                        onclick="window.location.href='{{ route('koleksi.index') }}'"
+                                        class="mt-4 bg-amber-300 hover:bg-black px-3 py-1 rounded-full shadow-md text-md text-black border border-2 border-black border-black hover:bg-black hover:text-white">
                                         <i class="fa-solid fa-arrow-rotate-left"></i> Kembali
                                     </button>
                                 </div>
                                 <div class="p-12" style="width:100%">
-                                    <img src="{{ url('uploads/' . $koleksi->foto) }}"
-                                                    alt="{{ $koleksi->judul_buku }}" class="w-full h-auto">
+                                    <img src="{{ url('uploads/' . $koleksi->foto) }}" alt="{{ $koleksi->judul_buku }}"
+                                        class="w-full h-auto">
                                 </div>
                             </div>
                         </div>

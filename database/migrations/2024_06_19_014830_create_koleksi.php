@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('penerbit');
             $table->year('tahun_terbit');
             $table->date('tgl_masuk')->nullable();
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->string('kode_sumber');
             $table->string('ketersediaan');
             $table->date('tgl_keluar')->nullable();

@@ -120,7 +120,7 @@ class KoleksiController extends Controller
         $koleksi = Koleksi::join('jenis', 'jenis.kode_jenis', '=', 'koleksi.kode_jenis')
             ->join('sumber', 'sumber.kode_sumber', '=', 'koleksi.kode_sumber')
             ->where('koleksi.id', $id)
-            ->select('koleksi.*', 'jenis.*', 'sumber.*')
+            ->select('koleksi.*', 'koleksi.id as id_koleksi', 'jenis.*', 'sumber.*')
             ->first();
         $jenis = Jenis::all();
         $sumber = Sumber::all();
@@ -142,7 +142,7 @@ class KoleksiController extends Controller
         $koleksi = Koleksi::join('jenis', 'jenis.kode_jenis', '=', 'koleksi.kode_jenis')
             ->join('sumber', 'sumber.kode_sumber', '=', 'koleksi.kode_sumber')
             ->where('koleksi.id', $id)
-            ->select('koleksi.*', 'jenis.*', 'sumber.*')
+            ->select('koleksi.*', 'koleksi.id as id_koleksi', 'jenis.*', 'sumber.*')
             ->first();
         $jenis = Jenis::all();
         $sumber = Sumber::all();
@@ -190,6 +190,7 @@ class KoleksiController extends Controller
         $koleksi->tgl_masuk = $request->input('tgl_masuk');
         $koleksi->kode_sumber = $request->input('kode_sumber');
 
+        $ko = $request->input('kode_koleksi');
         // Jika ada file foto yang diunggah
         if ($request->hasFile('foto')) {
             // Hapus foto lama jika ada
@@ -198,7 +199,7 @@ class KoleksiController extends Controller
             }
 
             $file = $request->file('foto');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = $ko . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads'), $filename);
 
             $koleksi->foto = $filename;
@@ -206,7 +207,11 @@ class KoleksiController extends Controller
 
         $koleksi->save();
 
-        return redirect()->route('koleksi.index')->with('message', 'Data Koleksi sudah diperbarui');
+        if ($request->input('ketersediaan') == 'AVAILABLE') {
+            return redirect()->route('koleksi.index')->with('message', 'Data Koleksi sudah diperbarui');
+        } else {
+            return redirect()->route('input_koleksi_keluar.index')->with('message', 'Data Koleksi sudah diperbarui');
+        }
     }
 
     /**
@@ -219,7 +224,7 @@ class KoleksiController extends Controller
     {
         $koleksi = Koleksi::findOrFail($id);
         $koleksi->delete();
-        return back()->with('message_delete','Data Koleksi Sudah dihapus');
+        return back()->with('message_delete', 'Data Koleksi Sudah dihapus');
     }
 
     public function keluar(Request $request)

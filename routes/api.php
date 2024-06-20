@@ -7,6 +7,7 @@ use App\Http\Controllers\API\JenisAPIController;
 use App\Http\Controllers\API\JurusanAPIController;
 use App\Http\Controllers\API\KategoriAPIController;
 use App\Http\Controllers\API\KoleksiAPIController;
+use App\Http\Controllers\API\KoleksiKeluarAPIController;
 use App\Http\Controllers\API\LantaiAPIController;
 use App\Http\Controllers\API\MerkAPIController;
 use App\Http\Controllers\API\PeminjamanAPIController;
@@ -37,6 +38,8 @@ Route::get('/jenis', [JenisAPIController::class, 'get_all'])->name('jenis.get');
 Route::get('/sumber', [SumberAPIController::class, 'get_all'])->name('sumber.get');
 Route::get('/jurusan', [JurusanAPIController::class, 'get_all'])->name('jurusan.get');
 Route::get('/koleksi', [KoleksiAPIController::class, 'get_all'])->name('koleksi.get');
+Route::get('/koleksi_keluar', [KoleksiAPIController::class, 'get_keluar'])->name('koleksi_keluar.get');
+Route::get('/input_koleksi_keluar', [KoleksiKeluarAPIController::class, 'get_all'])->name('input_koleksi_keluar.get');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

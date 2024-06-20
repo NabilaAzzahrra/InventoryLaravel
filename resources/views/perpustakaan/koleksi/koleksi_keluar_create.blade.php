@@ -13,15 +13,14 @@
                         <div class="p-4 text-gray-900 w-full">
                             <div class="bg-slate-100 shadow-2xl border-slate-900 border-xl p-4 rounded-lg ">
                                 <div class="flex items-center justify-between">
-                                    <h2>Tambah Data <span class="font-bold">Koleksi </span></h2>
+                                    <h2>Tambah Data <span class="font-bold">Koleksi Keluar</span></h2>
                                 </div>
                             </div>
                             <div class="flex justify-center">
                                 <div class="p-12" style="width:100%">
-                                    <form method="POST" action="{{ route('koleksi.update', $koleksi->id_koleksi) }}"
+                                    <form method="POST" action="{{ route('input_koleksi_keluar.store') }}"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        @method('PATCH')
                                         <div class="grid grid-cols-3 gap-5">
                                             <div class="mb-5 w-full">
                                                 <label for="kode_koleksi"
@@ -30,7 +29,7 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="text" id="kode_koleksi" name="kode_koleksi"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Kode...." value="{{ $koleksi->kode_koleksi }}"
+                                                    placeholder="Masukan Kode...." value="{{ $kode_koleksi }}"
                                                     readonly />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('kode_koleksi') }}</span>
@@ -42,8 +41,7 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="text" id="judul_buku" name="judul_buku"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Judul Koleksi...."
-                                                    value="{{ $koleksi->judul_buku }}" />
+                                                    placeholder="Masukan Judul Koleksi...." />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('judul_buku') }}</span>
                                             </div>
@@ -53,8 +51,7 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="text" id="pengarang" name="pengarang"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Pengarang...."
-                                                    value="{{ $koleksi->pengarang }}" />
+                                                    placeholder="Masukan Pengarang...." />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('pengarang') }}</span>
                                             </div>
@@ -62,18 +59,15 @@
                                         <div class="grid grid-cols-3 gap-5">
                                             <div class="mb-5 w-full">
                                                 <label for="lantai"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Jenis <span class="text-red-500">*</span>
-                                                </label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                                                    <span class="text-red-500">*</span></label>
                                                 <select
                                                     class="js-example-placeholder-single js-states form-control w-[385px] m-4"
                                                     id="kode_jenis" name="kode_jenis"
                                                     data-placeholder="Pilih Jenis Koleksi">
                                                     <option value="">Pilih...</option>
                                                     @foreach ($jenis as $m)
-                                                        <option value="{{ $m->kode_jenis }}"
-                                                            {{ old('kode_jenis', $koleksi->kode_jenis ?? '') == $m->kode_jenis ? 'selected' : '' }}>
-                                                            {{ $m->jenis }}
+                                                        <option value="{{ $m->kode_jenis }}">{{ $m->jenis }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -86,8 +80,7 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="text" id="penerbit" name="penerbit"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Penerbit...."
-                                                    value="{{ $koleksi->penerbit }}" />
+                                                    placeholder="Masukan Penerbit...." />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('penerbit') }}</span>
                                             </div>
@@ -98,46 +91,19 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="number" id="tahun_terbit" name="tahun_terbit"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Tahun Terbit...."
-                                                    value="{{ $koleksi->tahun_terbit }}" />
+                                                    placeholder="Masukan Tahun Terbit...." />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('tahun_terbit') }}</span>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-3 gap-5">
-                                            @php
-                                                if ($koleksi->ketersediaan == 'AVAILABLE') {
-                                                    $keluar = 'hidden';
-                                                    $masuk = '';
-                                                } else {
-                                                    $keluar = '';
-                                                    $masuk = 'hidden';
-                                                }
-
-                                            @endphp
-
-                                            <div class="mb-5 w-full {{$masuk}}">
-                                                <label for="tgl_masuk"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                                    Masuk
-                                                    <span class="text-red-500">*</span></label>
-                                                <input type="date" id="tgl_masuk" name="tgl_masuk"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Tanggal Masuk...."
-                                                    value="{{ $koleksi->tgl_masuk }}" />
-                                                <span
-                                                    class="text-sm m-l text-red-500">{{ $errors->first('tgl_masuk') }}</span>
-                                            </div>
-
-                                            <div class="mb-5 w-full {{$keluar}}">
+                                            <div class="mb-5 w-full">
                                                 <label for="tgl_keluar"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                                    Keluar
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Keluar
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="date" id="tgl_keluar" name="tgl_keluar"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Masukan Tanggal Keluar...."
-                                                    value="{{ $koleksi->tgl_keluar }}" />
+                                                    placeholder="Masukan Tanggal Keluar...." />
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('tgl_keluar') }}</span>
                                             </div>
@@ -152,42 +118,12 @@
                                                     data-placeholder="Pilih Sumber Koleksi">
                                                     <option value="">Pilih...</option>
                                                     @foreach ($sumber as $m)
-                                                        <option value="{{ $m->kode_sumber }}"
-                                                            {{ old('kode_sumber', $koleksi->kode_sumber ?? '') == $m->kode_sumber ? 'selected' : '' }}>
-                                                            {{ $m->sumber }}
+                                                        <option value="{{ $m->kode_sumber }}">{{ $m->sumber }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                                 <span
                                                     class="text-sm m-l text-red-500">{{ $errors->first('kode_sumber') }}</span>
-                                            </div>
-                                            <div class="mb-5 w-full {{$masuk}}">
-                                                <label for="foto"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
-                                                    <span class="text-red-500">*</span></label>
-                                                <input
-                                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                    aria-describedby="user_avatar_help" id="foto" name="foto"
-                                                    type="file">
-                                            </div>
-
-                                            <div class="mb-5 w-full {{$keluar}}">
-                                                <label for="ketersediaan"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ketersediaan
-                                                    <span class="text-red-500">*</span></label>
-                                                <input
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    aria-describedby="user_avatar_help" id="ketersediaan" name="ketersediaan"
-                                                    type="text" value="{{$koleksi->ketersediaan}}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-5 {{$masuk}}">
-                                            <div class="mb-5 w-full">
-                                                <label for="foto"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
-                                                    <span class="text-red-500">*</span></label>
-                                                <img src="{{ url('uploads/' . $koleksi->foto) }}"
-                                                    alt="{{ $koleksi->judul_buku }}" class="w-full h-auto">
                                             </div>
                                         </div>
                                         <div class="mb-5">

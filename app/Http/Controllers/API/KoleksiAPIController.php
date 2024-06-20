@@ -15,4 +15,22 @@ class KoleksiAPIController extends Controller
             'koleksi'=>$koleksi,
         ]);
     }
+
+    public function get_keluar()
+    {
+        $koleksiQuery = Koleksi::query();
+
+        $dateStart = request('fromDate', 'all');
+        $dateEnd = request('toDate', 'all');
+
+        if ($dateStart !== 'all' && $dateEnd !== 'all') {
+            $koleksiQuery->whereBetween('created_at', [$dateStart, $dateEnd]);
+        }
+
+        $koleksi = $koleksiQuery->with(['jenis','sumber'])->where('ketersediaan','NOT AVAILABLE')->get();
+
+        return response()->json([
+            'koleksi'=>$koleksi,
+        ]);
+    }
 }

@@ -174,7 +174,7 @@
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('input_koleksi_keluar.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Input Koleksi Keluar') }}
                         </x-nav-link>
                     </div>
@@ -198,7 +198,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                     aria-labelledby="dropdownLargeButton">
                                     <li>
-                                        <a href="{{ route('lantai.index') }}"
+                                        <a href="{{ route('report_koleksi_keluar.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Koleksi Keluar</a>
                                     </li>
                                     <li>
