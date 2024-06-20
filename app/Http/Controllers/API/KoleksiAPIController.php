@@ -8,6 +8,25 @@ use Illuminate\Http\Request;
 
 class KoleksiAPIController extends Controller
 {
+    public function get_print()
+    {
+        $koleksiQuery = Koleksi::query();
+
+        $dateStart = request('fromDate', 'all');
+        $dateEnd = request('toDate', 'all');
+
+        if ($dateStart !== 'all' && $dateEnd !== 'all') {
+            $koleksiQuery->whereBetween('tgl_masuk', [$dateStart, $dateEnd]);
+        }
+
+        $koleksi = $koleksiQuery->with(['jenis','sumber'])->where('kode_jenis','JS00004')->get();
+
+        return response()->json([
+            'koleksi'=>$koleksi,
+        ]);
+
+    }
+
     public function get_all()
     {
         $koleksiQuery = Koleksi::query();

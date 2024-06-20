@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BkeluarController;
 use App\Http\Controllers\BmasukController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\DetailKKNController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\JurusanController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PrintController;
+use App\Http\Controllers\PrintKoleksiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportKoleksiKeluarController;
 use App\Http\Controllers\ReportKoleksiMasukController;
@@ -70,6 +72,9 @@ Route::resource('input_koleksi_keluar', KoleksiKeluarController::class)->middlew
 Route::resource('report_koleksi_keluar', ReportKoleksiKeluarController::class)->middleware(['auth']);
 Route::resource('report_koleksi_masuk', ReportKoleksiMasukController::class)->middleware(['auth']);
 Route::resource('kelompok_kkn', KelompokKKNController::class)->middleware(['auth']);
+Route::resource('detail_kkn', DetailKKNController::class)->middleware(['auth']);
+Route::resource('print_koleksi', PrintKoleksiController::class)->middleware(['auth']);
+Route::get('/print_koleksi/{id}/show', [PrintKoleksiController::class, 'show'])->name('print_koleksi.edit');
 
 Route::get('/scan', [ScanScontroller::class, 'index'])->name('scan.index')->middleware(['auth']);
 Route::get('/scanQr/{id}/show', [ScanqrController::class, 'show'])->name('scanqr.edit');

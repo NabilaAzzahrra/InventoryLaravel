@@ -159,7 +159,7 @@ class ScanqrController extends Controller
         return back()->with('message_delete', 'Data Lantai Sudah dihapus');
     }
 
-    /** 
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

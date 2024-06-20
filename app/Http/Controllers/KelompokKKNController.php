@@ -160,12 +160,17 @@ class KelompokKKNController extends Controller
             ->where('koleksi.id', $id)
             ->select('koleksi.*', 'koleksi.id as id_koleksi', 'jenis.*', 'sumber.*')
             ->first();
+        $detail = Koleksi::join('detail_kelompok', 'detail_kelompok.kode_koleksi', '=', 'koleksi.kode_koleksi')
+            ->where('koleksi.id', $id)
+            ->select('koleksi.*', 'koleksi.id as id_koleksi', 'detail_kelompok.*')
+            ->get();
         $jenis = Jenis::all();
         $sumber = Sumber::all();
         return view('perpustakaan/kkn/edit')->with([
             'koleksi' => $koleksi,
             'jenis' => $jenis,
             'sumber' => $sumber,
+            'detail' => $detail,
         ]);
     }
 
@@ -178,7 +183,68 @@ class KelompokKKNController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'kode_koleksi' => 'required|string|max:255',
+            'judul_buku' => 'required|string|max:255',
+            'pengarang' => 'required|string|max:255',
+            'kode_jenis' => 'required|string',
+            'tahun_terbit' => 'required|integer',
+            'tgl_masuk' => 'required|date',
+            'kode_sumber' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $koleksi = Koleksi::find($id);
+
+        if (!$koleksi) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        $koleksi->kode_koleksi = $request->input('kode_koleksi');
+        $koleksi->judul_buku = $request->input('judul_buku');
+        $koleksi->pengarang = $request->input('pengarang');
+        $koleksi->kode_jenis = $request->input('kode_jenis');
+        $koleksi->tahun_terbit = $request->input('tahun_terbit');
+        $koleksi->tgl_masuk = $request->input('tgl_masuk');
+        $koleksi->kode_sumber = $request->input('kode_sumber');
+
+        $ko = $request->input('kode_koleksi');
+        // Jika ada file foto yang diunggah
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($koleksi->foto && file_exists(public_path('uploads/' . $koleksi->foto))) {
+                unlink(public_path('uploads/' . $koleksi->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = $ko . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $filename);
+
+            $koleksi->foto = $filename;
+        }
+
+        $koleksi->save();
+
+        $code = $request->input('kode_koleksi');
+        $students = $request->input('student', []);
+        $nims = $request->input('nim', []);
+        $jurusans = $request->input('major', []);
+        $classess = $request->input('classes', []);
+
+        foreach ($students as $index => $student) {
+            $dataa = [
+                'kode_koleksi' => $code,
+                'nim' => $nims[$index],
+                'nama' => $student,
+                'jurusan' => $jurusans[$index],
+                'kelas' => $classess[$index],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+            DetailKel::create($dataa);
+        }
+
+        return redirect()->route('kelompok_kkn.index')->with('message', 'Data Kelompok KKN sudah diperbarui');
     }
 
     /**

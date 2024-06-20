@@ -13,7 +13,7 @@
                         <div class="p-4 text-gray-900 w-full">
                             <div class="bg-slate-100 shadow-2xl border-slate-900 border-xl p-4 rounded-lg ">
                                 <div class="flex items-center justify-between">
-                                    <h2>Tambah Data <span class="font-bold">Koleksi </span></h2>
+                                    <h2>Data <span class="font-bold">Koleksi </span></h2>
                                 </div>
                             </div>
                             <div class="flex justify-center">
