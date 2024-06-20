@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('kode_koleksi');
             $table->string('judul_buku');
-            $table->string('pengarang');
+            $table->string('pengarang')->nullable();
             $table->string('kode_jenis');
-            $table->string('penerbit');
+            $table->string('penerbit')->nullable();
             $table->year('tahun_terbit');
             $table->date('tgl_masuk')->nullable();
             $table->string('foto')->nullable();

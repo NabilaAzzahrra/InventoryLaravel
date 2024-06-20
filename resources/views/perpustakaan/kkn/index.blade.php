@@ -13,12 +13,12 @@
                         <form id="print-form" action="{{ route('koleksi.keluar') }}" method="POST" class="formupdate"
                             target="_blank">
                             @csrf
-                            <div class="text-gray-900 p-4 w-full">
+                            <div class="p-4 text-gray-900 w-full">
                                 <div class="bg-slate-100 shadow-2xl border-slate-900 border-xl p-4 rounded-lg ">
                                     <div class="flex items-center justify-between">
-                                        <h2>Data <span class="font-bold">Koleksi </span></h2>
+                                        <h2>Data <span class="font-bold">Koleksi Kuliah Kerja Nyata (KKN)</span></h2>
                                         <div class="flex gap-1">
-                                            <a href="{{ route('input_koleksi_keluar.create') }}">
+                                            <a href="{{ route('kelompok_kkn.create') }}">
                                                 <div
                                                     class="bg-sky-400 py-2 px-4 rounded-lg text-white hover:bg-sky-500">
                                                     <i class="fa-solid fa-plus"></i>
@@ -28,18 +28,16 @@
                                     </div>
                                 </div>
                                 <div class="flex justify-center">
-                                    <div class="w-full mt-5 mx-auto">
+                                    <div class="w-full mt-5" style="width:100%">
                                         <table class="table table-bordered" id="koleksi-datatable">
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Kode Koleksi</th>
                                                     <th>Judul Koleksi </th>
-                                                    <th>Pengarang</th>
                                                     <th>Jenis</th>
-                                                    <th>Penerbit</th>
-                                                    <th>Tahun Terbit</th>
-                                                    <th>Tanggal Keluar</th>
+                                                    <th>Tahun Angkatan</th>
+                                                    <th>Tanggal Masuk</th>
                                                     <th>Sumber</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -113,7 +111,7 @@
         $(document).ready(function() {
             $('#koleksi-datatable').DataTable({
                 ajax: {
-                    url: 'api/koleksi_keluar',
+                    url: 'api/koleksi_kkn',
                     dataSrc: 'koleksi'
                 },
                 initComplete: function() {
@@ -121,83 +119,75 @@
                 },
                 paging: false,
                 columns: [{
-                    data: 'no',
-                    render: (data, type, row, meta) => {
-                        return `<div style="text-align:center">${meta.row + 1}.</div>`;
-                    }
-                }, {
-                    data: 'kode_koleksi',
-                    render: (data, type, row) => {
-                        return data;
-                    }
-                }, {
-                    data: 'judul_buku',
-                    render: (data, type, row) => {
-                        return `<p class="text-wrap">${data}</p>`;
-                    }
-                }, {
-                    data: 'pengarang',
-                    render: (data, type, row) => {
-                        return data;
-                    }
-                }, {
-                    data: 'jenis',
-                    render: (data, type, row) => {
-                        return data.jenis;
-                    }
-                }, {
-                    data: 'penerbit',
-                    render: (data, type, row) => {
-                        return data;
-                    }
-                }, {
-                    data: 'tahun_terbit',
-                    render: (data, type, row) => {
-                        return data;
-                    }
-                }, {
-                    data: 'tgl_keluar',
-                    render: (data, type, row) => {
-                        if (type === 'display' || type === 'filter') {
-                            // Format data tgl_masuk ke format d/m/Y
-                            const date = new Date(data);
-                            const day = String(date.getDate()).padStart(2, '0');
-                            const month = String(date.getMonth() + 1).padStart(2, '0');
-                            const year = date.getFullYear();
-                            return `${day}/${month}/${year}`;
-                        } else {
-                            // Jika tipe lainnya, kembalikan data aslinya
+                        data: 'no',
+                        render: (data, type, row, meta) => {
+                            return `<div style="text-align:center">${meta.row + 1}.</div>`;
+                        }
+                    }, {
+                        data: 'kode_koleksi',
+                        render: (data, type, row) => {
                             return data;
                         }
-                    }
-                }, {
-                    data: 'sumber',
-                    render: (data, type, row) => {
-                        return data.sumber;
-                    }
-                }, {
-                    data: {
-                        no: 'no',
-                        judul_buku: 'judul_buku'
+                    }, {
+                        data: 'judul_buku',
+                        render: (data, type, row) => {
+                            return `<p class="text-wrap">${data}</p>`;
+                        }
+                    }, {
+                        data: 'jenis',
+                        render: (data, type, row) => {
+                            return `<p class="text-wrap">${data.jenis}</p>`;
+                        }
+                    }, {
+                        data: 'tahun_terbit',
+                        render: (data, type, row) => {
+                            return data;
+                        }
+                    }, {
+                        data: 'tgl_masuk',
+                        render: (data, type, row) => {
+                            if (type === 'display' || type === 'filter') {
+                                // Format data tgl_masuk ke format d/m/Y
+                                const date = new Date(data);
+                                const day = String(date.getDate()).padStart(2, '0');
+                                const month = String(date.getMonth() + 1).padStart(2, '0');
+                                const year = date.getFullYear();
+                                return `${day}/${month}/${year}`;
+                            } else {
+                                // Jika tipe lainnya, kembalikan data aslinya
+                                return data;
+                            }
+                        }
+                    }, {
+                        data: 'sumber',
+                        render: (data, type, row) => {
+                            return data.sumber;
+                        }
                     },
-                    render: (data) => {
-                        var mo = "{{ route('koleksi.show', ':id') }}".replace(
-                            ':id',
-                            data.id
-                        );
-                        let moreUrl = `
+                    {
+                        data: {
+                            no: 'no',
+                            judul_buku: 'judul_buku'
+                        },
+                        render: (data) => {
+                            var mo = "{{ route('kelompok_kkn.show', ':id') }}".replace(
+                                ':id',
+                                data.id
+                            );
+                            let moreUrl = `
                                 <button type="button" onclick="window.location.href='${mo}'" class="bg-amber-300 hover:bg-amber-400 px-3 py-1 rounded-md text-xs text-white">
                                     <i class="fa-solid fa-circle-info text-white"></i>
                                 </button>`;
-                        let deleteUrl =
-                            `<button type="button" onclick="return koleksiDelete('${data.id}','${data.judul_buku}')" class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white"><i class="fas fa-trash"></i></button>`;
-                        return `
+                            let deleteUrl =
+                                `<button type="button" onclick="return koleksiDelete('${data.id}','${data.judul_buku}')" class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white"><i class="fas fa-trash"></i></button>`;
+                            return `
                         <div class='flex gap-2'>
                             <div style="text-align:center">${deleteUrl}</div>
                             <div style="text-align:center">${moreUrl}</div>
                         </div>`;
-                    }
-                }, ],
+                        }
+                    },
+                ],
             });
         });
 
@@ -262,6 +252,24 @@
                         alert('Error deleting record');
                         console.log(error);
                     });
+            }
+        }
+    </script>
+    <script>
+        function checkAll(ele) {
+            var checkboxes = document.getElementsByTagName('input');
+            if (ele.checked) {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == 'checkbox' && !(checkboxes[i].disabled)) {
+                        checkboxes[i].checked = true;
+                    }
+                }
+            } else {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = false;
+                    }
+                }
             }
         }
     </script>

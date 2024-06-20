@@ -39,6 +39,7 @@ Route::get('/sumber', [SumberAPIController::class, 'get_all'])->name('sumber.get
 Route::get('/jurusan', [JurusanAPIController::class, 'get_all'])->name('jurusan.get');
 Route::get('/koleksi', [KoleksiAPIController::class, 'get_all'])->name('koleksi.get');
 Route::get('/koleksi_keluar', [KoleksiAPIController::class, 'get_keluar'])->name('koleksi_keluar.get');
+Route::get('/koleksi_kkn', [KoleksiAPIController::class, 'get_kkn'])->name('koleksi_kkn.get');
 Route::get('/input_koleksi_keluar', [KoleksiKeluarAPIController::class, 'get_all'])->name('input_koleksi_keluar.get');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -202,7 +202,7 @@
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Koleksi Keluar</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('ruang.index') }}"
+                                        <a href="{{ route('report_koleksi_masuk.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Koleksi Masuk</a>
                                     </li>
                                 </ul>
@@ -212,7 +212,7 @@
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('kelompok_kkn.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Input Koleksi KKN Kelompok') }}
                         </x-nav-link>
                     </div>

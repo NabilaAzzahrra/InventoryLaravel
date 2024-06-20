@@ -10,10 +10,21 @@ class KoleksiAPIController extends Controller
 {
     public function get_all()
     {
-        $koleksi = Koleksi::with(['jenis','sumber'])->where('ketersediaan','AVAILABLE')->get();
+        $koleksiQuery = Koleksi::query();
+
+        $dateStart = request('fromDate', 'all');
+        $dateEnd = request('toDate', 'all');
+
+        if ($dateStart !== 'all' && $dateEnd !== 'all') {
+            $koleksiQuery->whereBetween('tgl_masuk', [$dateStart, $dateEnd]);
+        }
+
+        $koleksi = $koleksiQuery->with(['jenis','sumber'])->where('ketersediaan','AVAILABLE')->get();
+
         return response()->json([
             'koleksi'=>$koleksi,
         ]);
+
     }
 
     public function get_keluar()
@@ -24,10 +35,19 @@ class KoleksiAPIController extends Controller
         $dateEnd = request('toDate', 'all');
 
         if ($dateStart !== 'all' && $dateEnd !== 'all') {
-            $koleksiQuery->whereBetween('created_at', [$dateStart, $dateEnd]);
+            $koleksiQuery->whereBetween('tgl_keluar', [$dateStart, $dateEnd]);
         }
 
         $koleksi = $koleksiQuery->with(['jenis','sumber'])->where('ketersediaan','NOT AVAILABLE')->get();
+
+        return response()->json([
+            'koleksi'=>$koleksi,
+        ]);
+    }
+
+    public function get_kkn()
+    {
+        $koleksi = Koleksi::with(['jenis','sumber'])->where('kode_jenis', 'JS00002')->get();
 
         return response()->json([
             'koleksi'=>$koleksi,

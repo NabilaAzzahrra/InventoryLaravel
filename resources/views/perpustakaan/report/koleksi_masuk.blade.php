@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('REPORT KOLEKSI KELUAR') }}
+            {{ __('REPORT KOLEKSI MASUK') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -14,7 +14,7 @@
                     <div class="bg-slate-100 shadow-2xl border-slate-900 border-xl p-4 rounded-lg ">
                         <div class="flex justify-between">
                             <div class="p-2">
-                                <h2>REPORT KOLEKSI KELUAR</h2>
+                                <h2>REPORT KOLEKSI MASUK</h2>
                             </div>
                             <div>
                                 <button onclick="filter(this)" data-modal-target="sourceModal"
@@ -31,7 +31,7 @@
                     </div>
                     <div class="flex justify-center">
                         <div class="p-12" style="width:100%">
-                            <table class="table table-bordered" id="keluar-datatable">
+                            <table class="table table-bordered" id="masuk-datatable">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -41,7 +41,7 @@
                                         <th>Jenis</th>
                                         <th>Penerbit</th>
                                         <th>Tahun Terbit</th>
-                                        <th>Tanggal Keluar</th>
+                                        <th>Tanggal Masuk</th>
                                         <th>Sumber</th>
                                     </tr>
                                 </thead>
@@ -101,7 +101,7 @@
             let dataTableDataRegisterProgramInstance;
             let dataTableDataRegisterProgramInitialized = false;
             let urlItemDetail =
-                `/api/koleksi_keluar`;
+                `/api/koleksi`;
         </script>
         <script>
             const changeFilterDataRegisterProgram = () => {
@@ -117,14 +117,14 @@
 
                 let queryString = queryParams.join('&');
 
-                urlItemDetail = `/api/koleksi_keluar?${queryString}`;
+                urlItemDetail = `/api/koleksi?${queryString}`;
 
                 if (dataTableDataRegisterProgramInstance) {
                     dataTableDataRegisterProgramInstance.clear();
                     dataTableDataRegisterProgramInstance.destroy();
                     getDataTableRegisterProgram()
                         .then((response) => {
-                            dataTableDataRegisterProgramInstance = $('#keluar-datatable').DataTable(response.config);
+                            dataTableDataRegisterProgramInstance = $('#masuk-datatable').DataTable(response.config);
                             dataTableDataRegisterProgramInitialized = response.initialized;
                             document.getElementById('sourceModal').classList.add('hidden');
                         })
@@ -179,10 +179,10 @@
                                     return data;
                                 }
                             }, {
-                                data: 'tgl_keluar',
+                                data: 'tgl_masuk',
                                 render: (data, type, row) => {
                                     if (type === 'display' || type === 'filter') {
-                                        // Format data tgl_keluar ke format d/m/Y
+                                        // Format data tgl_masuk ke format d/m/Y
                                         const date = new Date(data);
                                         const day = String(date.getDate()).padStart(2, '0');
                                         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -235,7 +235,7 @@
                     ])
                     .then((response) => {
                         let responseDTRS = response[0];
-                        dataTableDataRegisterProgramInstance = $('#keluar-datatable').DataTable(
+                        dataTableDataRegisterProgramInstance = $('#masuk-datatable').DataTable(
                             responseDTRS
                             .config);
                         dataTableDataRegisterProgramInitialized = responseDTRS.initialized;
@@ -272,14 +272,14 @@
                 const workbook = new ExcelJS.Workbook();
                 const worksheet = workbook.addWorksheet('Data');
                 let header = ['No', 'Kode Koleksi', 'Judul Koleksi', 'Pengarang', 'Jenis', 'Penerbit',
-                    'Tahun Terbit', 'Tanggal Keluar', 'Sumber'
+                    'Tahun Terbit', 'Tanggal Masuk', 'Sumber'
                 ];
                 let dataExcel = [
                     header,
                 ];
                 dataNabil.forEach((data, index) => {
                     let studentBucket = [];
-                    const date = new Date(data.tgl_keluar);
+                    const date = new Date(data.tgl_masuk);
                     const day = date.getDate().toString().padStart(2,
                         '0');
                     const month = (date.getMonth() + 1).toString().padStart(2,
@@ -303,7 +303,7 @@
                         `${data.jenis.jenis}`,
                         `${data.penerbit}`,
                         `${data.tahun_terbit}`,
-                        `${formatDate(data.tgl_keluar)}`,
+                        `${formatDate(data.tgl_masuk)}`,
                         `${data.sumber.sumber}`,
                     );
                     dataExcel.push(studentBucket);
@@ -342,7 +342,7 @@
                 const doc = new jsPDF('landscape', 'mm', 'a4');
 
                 let header = ['No', 'Kode Koleksi', 'Judul Koleksi', 'Pengarang', 'Jenis', 'Penerbit',
-                    'Tahun Terbit', 'Tanggal Keluar', 'Sumber'
+                    'Tahun Terbit', 'Tanggal Masuk', 'Sumber'
                 ];
 
                 let startX = 10;
@@ -376,7 +376,7 @@
                         `${data.jenis.jenis}`,
                         `${data.penerbit}`,
                         `${data.tahun_terbit}`,
-                        `${formatDate(data.tgl_keluar)}`,
+                        `${formatDate(data.tgl_masuk)}`,
                         `${data.sumber.sumber}`,
                     ];
 

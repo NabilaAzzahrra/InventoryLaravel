@@ -67,16 +67,19 @@
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900 bg-slate-200 rounded-xl p-2" id="modal-title">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900 bg-slate-200 rounded-xl p-2"
+                                    id="modal-title">
                                     Pilih Tanggal
                                 </h3>
                                 <div class="mb-5 w-full mt-6">
                                     <label for="foto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Keluar
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
+                                        Keluar
                                         <span class="text-red-500">*</span></label>
-                                        <input
+                                    <input
                                         class="block w-[430px] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                        aria-describedby="user_avatar_help" id="tgl_keluar" name="tgl_keluar" type="date">
+                                        aria-describedby="user_avatar_help" id="tgl_keluar" name="tgl_keluar"
+                                        type="date">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +139,7 @@
                     }, {
                         data: 'judul_buku',
                         render: (data, type, row) => {
-                            return data;
+                            return `<p class="text-wrap">${data}</p>`;
                         }
                     }, {
                         data: 'pengarang',
@@ -146,7 +149,7 @@
                     }, {
                         data: 'jenis',
                         render: (data, type, row) => {
-                            return data.jenis;
+                            return `<p class="text-wrap">${data.jenis}</p>`;
                         }
                     }, {
                         data: 'penerbit',
@@ -161,7 +164,17 @@
                     }, {
                         data: 'tgl_masuk',
                         render: (data, type, row) => {
-                            return data;
+                            if (type === 'display' || type === 'filter') {
+                                // Format data tgl_masuk ke format d/m/Y
+                                const date = new Date(data);
+                                const day = String(date.getDate()).padStart(2, '0');
+                                const month = String(date.getMonth() + 1).padStart(2, '0');
+                                const year = date.getFullYear();
+                                return `${day}/${month}/${year}`;
+                            } else {
+                                // Jika tipe lainnya, kembalikan data aslinya
+                                return data;
+                            }
                         }
                     }, {
                         data: 'sumber',
@@ -186,26 +199,26 @@
                         }
                     }, {
                         data: {
-                        no: 'no',
-                        judul_buku: 'judul_buku'
-                    },
-                    render: (data) => {
-                        var mo = "{{ route('koleksi.show', ':id') }}".replace(
-                            ':id',
-                            data.id
-                        );
-                        let moreUrl = `
+                            no: 'no',
+                            judul_buku: 'judul_buku'
+                        },
+                        render: (data) => {
+                            var mo = "{{ route('koleksi.show', ':id') }}".replace(
+                                ':id',
+                                data.id
+                            );
+                            let moreUrl = `
                                 <button type="button" onclick="window.location.href='${mo}'" class="bg-amber-300 hover:bg-amber-400 px-3 py-1 rounded-md text-xs text-white">
                                     <i class="fa-solid fa-circle-info text-white"></i>
                                 </button>`;
-                        let deleteUrl =
-                            `<button type="button" onclick="return koleksiDelete('${data.id}','${data.judul_buku}')" class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white"><i class="fas fa-trash"></i></button>`;
-                        return `
+                            let deleteUrl =
+                                `<button type="button" onclick="return koleksiDelete('${data.id}','${data.judul_buku}')" class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white"><i class="fas fa-trash"></i></button>`;
+                            return `
                         <div class='flex gap-2'>
                             <div style="text-align:center">${deleteUrl}</div>
                             <div style="text-align:center">${moreUrl}</div>
                         </div>`;
-                    }
+                        }
                     },
                 ],
             });
