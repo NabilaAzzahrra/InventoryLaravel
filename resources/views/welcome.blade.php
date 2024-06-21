@@ -395,7 +395,7 @@
 </head>
 
 <body class="antialiased">
-    
+
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
@@ -405,7 +405,7 @@
                         <div><img src="{{ url('images/logolp.png') }}" alt="" srcset="" class="w-[200px] h-auto"></div>
                         <div><img src="{{ url('images/gmu.png') }}" alt="" srcset="" class="w-[150px] h-auto"></div>
                     </div>
-                    <h1 class="font-bold text-[80px] text-wrap">Inventoy Application<br> Web-Based</h1>
+                    <h1 class="font-bold text-[80px] text-wrap">Inventory Application<br> Web-Based</h1>
                     <p class="text-md pb-6">Monitoring inventory and item lending with a web-based application at LP3I
                         Polytechnic Tasikmalaya Campus. This application is designed to facilitate users in managing
                         inventory. It helps streamline the process of tracking and borrowing items, ensuring efficient
