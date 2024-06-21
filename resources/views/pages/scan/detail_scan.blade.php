@@ -121,7 +121,7 @@
                     <div id="peminjamanForm" class="flex flex-col hidden p-4 space-y-6">
                         <input type="hidden" name="idItem" id="idItem">
                         <input type="hidden" name="judulPinjam" id="judulPinjam" value="PEMINJAMAN">
-                        <input type="text" name="pesan" id="pesan" value="BELUM DIKEMBALIKAN">
+                        <input type="hidden" name="pesan" id="pesan" value="BELUM DIKEMBALIKAN">
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama
                                 Lengkap</label>

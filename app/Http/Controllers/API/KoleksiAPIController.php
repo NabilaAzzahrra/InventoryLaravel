@@ -34,8 +34,24 @@ class KoleksiAPIController extends Controller
         $dateStart = request('fromDate', 'all');
         $dateEnd = request('toDate', 'all');
 
+        $jenis = request('jenis', 'all');
+        $sumber = request('sumber', 'all');
+        $tahun = request('tahun', 'all');
+
         if ($dateStart !== 'all' && $dateEnd !== 'all') {
             $koleksiQuery->whereBetween('tgl_masuk', [$dateStart, $dateEnd]);
+        }
+
+        if ($jenis !== 'all') {
+            $koleksiQuery->where('kode_jenis', $jenis);
+        }
+
+        if ($sumber !== 'all') {
+            $koleksiQuery->where('kode_sumber', $sumber);
+        }
+
+        if ($tahun !== 'all') {
+            $koleksiQuery->where('tahun_terbit', $tahun);
         }
 
         $koleksi = $koleksiQuery->with(['jenis','sumber'])->where('ketersediaan','AVAILABLE')->get();

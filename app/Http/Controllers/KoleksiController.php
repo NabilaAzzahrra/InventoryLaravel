@@ -17,8 +17,17 @@ class KoleksiController extends Controller
     public function index()
     {
         $koleksi = Koleksi::where('ketersediaan', 'AVAILABLE')->get();
+        $jenis = Jenis::all();
+        $sumber = Sumber::all();
+        $tahun = Koleksi::select('tahun_terbit')
+                ->groupBy('tahun_terbit')
+                ->orderBy('tahun_terbit', 'asc')
+                ->get();
         return view('perpustakaan/koleksi/index')->with([
-            'koleksi' => $koleksi
+            'koleksi' => $koleksi,
+            'jenis' => $jenis,
+            'sumber' => $sumber,
+            'tahun' => $tahun,
         ]);
     }
 
